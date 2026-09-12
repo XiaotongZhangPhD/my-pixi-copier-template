@@ -1,0 +1,9 @@
+YAML
+repos:
+  - repo: http://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.0
+    hooks:
+      - id: ruff
+        args: [ --fix ]
+      - id: ruff-format
+      

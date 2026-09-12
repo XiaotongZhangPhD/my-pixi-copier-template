@@ -1,0 +1,22 @@
+[project]
+name = "{{ project_slug }}"
+platforms = ["linux-64", "win-64"]
+
+[dependencies]
+python = "{{ python_version }}.*"
+
+[feature.dev.dependencies]
+pytest = "*"
+ruff = "*"
+ipykernel = "*"
+pre-commit = "*"
+
+[environments]
+default = { features = ["dev"], solve-group = "default" }
+
+[task]
+test = "pytest"
+lint-check = "ruff check src/ tests/"
+format = "ruff format src/ tests/"
+lint = { depends-on = ["lint-check", "format"] }
+clean = "rm -rf .pytest_cache src/{{ module_name }}/__pycache__ test/__pycache__"

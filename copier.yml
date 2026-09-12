@@ -1,0 +1,26 @@
+project_name:
+  type: str
+  help: What is the name your project?
+  default: My Project
+
+project_slug:
+  type: str
+  help: The folder name for the project
+  default: "{% if project_name %}{{ project_name | lower | replace(' ', '-')}}{% else %}my-project{% endif %}"
+
+module_name:
+  type: str
+  help: The Python module name
+  default: "{% if project_name %}{{ project_name | lower | replace(' ', '-') }}{% else %}my-project{% endif %}"
+
+python_version:
+  type: str
+  help: Which Python version?
+  choices: ["3.14", "3.13", "3.12"]
+  default: "3.13"
+
+_tasks:
+  - git init
+  - git branch -M main
+  - pixi install
+  - pixi run pre-commit install
